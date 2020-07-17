@@ -1,0 +1,15 @@
+import firebase from 'firebase/app'
+import 'firebase/storage'
+
+let firebaseConfig = {
+    apiKey: "AIzaSyDlE59HwBaOOnp6jJ475Wm-j4t9izg836c",
+    authDomain: "tallerfixter-f7f34.firebaseapp.com",
+    databaseURL: "https://tallerfixter-f7f34.firebaseio.com",
+    projectId: "tallerfixter-f7f34",
+    storageBucket: "tallerfixter-f7f34.appspot.com",
+    messagingSenderId: "904827933328",
+    appId: "1:904827933328:web:88b68abe2f11a23914be15"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  export default firebase
