@@ -1,9 +1,8 @@
 import React, {useState, useRef} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import firebase from './services/firebase'
+import Uploader from './components/Uploader' 
 
-let img = "https://c2-preview.prosites.com/211308/wy/images/Perfect%20Smile%20Dental%20Tijuana%20Dentist%20Implant%20Crown%20.jpg"
 
 function App() {
 
@@ -15,35 +14,14 @@ function App() {
     file:null,
     progress:0
   })
-  let elInpu = useRef()
 
-  function onClick(){
-    elInpu.current.click()
-    
+  function getFirebaseLink(url){
+    console.log("soy el papa y tengo el link", url)
+    setForm({...form, link:url})
   }
 
-  function onChange(event){ 
-    let file = event.target.files[0]
-    console.log(file)
-    if(file.type === "video/mp4") return setForm({...form, file})
-    // convertir de file a string
-    let reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = function(){
-      setForm({...form, link:reader.result, file})
-    }
+  function onSubmit(){ // aqui ya queremos subir al server
 
-   
-  }
-
-  function uploadFile (){
-    let cvsRef = firebase.storage().ref("cvs") // esto es la carpeta
-    let task = cvsRef.child(form.file.name).put(form.file) // es la tarea
-    task.on('state_changed', snap=>{
-      let progress = (snap.bytesTransferred / snap.totalBytes) * 100;
-      console.log(progress)
-      setForm({...form, progress})
-    })
   }
 
   return (
@@ -57,12 +35,8 @@ function App() {
         <input type="text" placeholder="Name" />
         <input type="text" placeholder="Email" />
         <input type="text" placeholder="CV" />
-        <input onChange={onChange} ref={elInpu} hidden type="file" placeholder="Foto" />
-        <div className="loader-container">
-          <div style={{width:`${form.progress}%`, backgroundColor:form.progress>99 ? "green":"orange"}} ></div>
-        </div>
-        <img onClick={onClick} style={{cursor:"pointer"}} width="140" src={ form.link ? form.link : img } alt="upload file icon" />
-        <button onClick={uploadFile} >Subir</button>
+        <Uploader getLink={getFirebaseLink} />
+       <button onClick={onSubmit} >Subir</button>
       </header>
     </div>
   );
