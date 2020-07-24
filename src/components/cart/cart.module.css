@@ -1,0 +1,70 @@
+.cartOverlay{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    top:0;
+    transition: all .3s ease-out;
+    opacity: 1;
+}
+
+.cartHolder{
+    width:500px;
+    height: 100vh;
+    background-color: royalblue;
+    position: fixed;
+    top:0;
+    right: 0;
+    transition: all .5s ease-in;
+}
+
+.hidden{
+    top:0;
+    right: 0;
+    transform: translateX(1000px);
+    visibility: hidden;
+}
+
+.hidden2{
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ----  Fila ---- */
+
+.rowContainer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 20px;
+    color: whitesmoke;
+}
+
+.rowContainer div img{
+    width: 100px;
+    border-radius: 5px;
+  
+}
+
+.rowContainer > div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+}
+
+ /* aqui quiero seleccionar mi input y mod ESPECIFICIDAD!! */
+ .rowContainer div:nth-child(2) input{
+     width: 30px;
+ }
+
+.rowContainer > div:last-child{
+    align-self: flex-end;
+}
+
+.rowContainer > div:last-child span:first-child{
+    color: red;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* TAREA  */
+/* Tunearlo pa que se vea bien chuli */
