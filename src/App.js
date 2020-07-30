@@ -3,12 +3,13 @@ import React, {useState} from 'react';
 import './App.css';
 // import Uploader from './components/Uploader' 
 import Cart from './components/cart/Cart';
+import Routes from './Routes';
 
 
 function App() {
 
   let [state, setState] = useState({
-    show:true
+    show:false
   })
 
   function toggleShow(){
@@ -20,6 +21,9 @@ function App() {
     <button onClick={toggleShow}>
       Blissito
     </button>
+
+      <Routes/>
+
     <Cart 
       onCancel={toggleShow}
       show={state.show} />
