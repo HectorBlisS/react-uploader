@@ -11,6 +11,7 @@ function App() {
   let [state, setState] = useState({
     show:false
   })
+  let [list, setList] = useState([])
 
   function toggleShow(){
     setState({...state, show: !state.show})
@@ -22,11 +23,13 @@ function App() {
       Blissito
     </button>
 
-      <Routes/>
+      <Routes />
 
     <Cart 
       onCancel={toggleShow}
-      show={state.show} />
+      show={state.show} 
+      list={list}
+      />
     </div>
   );
 }
