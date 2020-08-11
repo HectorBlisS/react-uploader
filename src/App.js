@@ -4,57 +4,26 @@ import './App.css';
 // import Uploader from './components/Uploader' 
 import Cart from './components/cart/Cart';
 import Routes from './Routes';
+import {useSelector, useDispatch} from 'react-redux' 
+import {getProductsAction} from './redux/productsDuck'
 
 
 function App() {
+  let dispatch = useDispatch() // instance
+  let array = useSelector(state=>state.products.array) // 1.- sacar datos del state / store / stateGlobal
 
-  useEffect(() => {
-    console.log("effect");
-    fetch("https://rickandmortyapi.com/graphql/", {
-      method: "POST",
-      body: JSON.stringify({
-        query: "{characters\n{results{\nid\n name\n image\n species}}}"
-      }),
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        console.log(res);
-        return res.json();
-      })
-      .then(r => console.log(r));
-  }, []);
+  useEffect(()=>{
 
-  let [state, setState] = useState({
-    show:false
-  })
-  let [list, setList] = useState([])
+    dispatch(getProductsAction()) // 2.- Pedir conseguir datos desde fuera (servidor api)
 
-  function toggleShow(){
-    setState({...state, show: !state.show})
-  }
+  }, [])
 
   return (
     <div >
-    <button onClick={toggleShow}>
-      Blissito
-    </button>
-
-      <Routes />
-
-    <Cart 
-      onCancel={toggleShow}
-      show={state.show} 
-      list={list}
-      />
+      {array.map(p=><p>{p.title}</p>)}
+      {!!array.length || <h2>No hay productos</h2>}
     </div>
   );
 }
 
 export default App;
-
-// 1.- Hacer bonito el loader
-// 2.- agregar el numero o completado
-// 3.- quitar el form cuando ya se está subiendo
-// 4.- prevenir la salida del usuario si hay una tarea importante...
