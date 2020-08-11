@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 // import Uploader from './components/Uploader' 
@@ -7,6 +7,24 @@ import Routes from './Routes';
 
 
 function App() {
+
+  useEffect(() => {
+    console.log("effect");
+    fetch("https://rickandmortyapi.com/graphql/", {
+      method: "POST",
+      body: JSON.stringify({
+        query: "{characters\n{results{\nid\n name\n image\n species}}}"
+      }),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        console.log(res);
+        return res.json();
+      })
+      .then(r => console.log(r));
+  }, []);
 
   let [state, setState] = useState({
     show:false
