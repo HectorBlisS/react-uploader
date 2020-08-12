@@ -1,15 +1,17 @@
-import React, {Fragment, useEffect} from 'react'
+import React, {Fragment, useEffect, useContext} from 'react'
 import styles from './cart.module.css'
 import CartRow from './CartRow'
 import useCart from '../customHooks/useCart'
+import {CartContext} from '../contexts/useCart'
 
 export default function Cart({show=false, onCancel}){
 
-    let [list] = useCart()
+    let cart = useContext(CartContext)
+    let {items} = cart.state
 
     useEffect(()=>{
-        console.log("Esto es el cart: ", list)
-    }, [list])
+        console.log("desde el carrito: ", cart.state)
+    }, [cart.state])
 
     return (
         <Fragment>
@@ -23,7 +25,7 @@ export default function Cart({show=false, onCancel}){
                 show ? styles.cartHolder :
                 `${styles.cartOverlay} ${styles.hidden}`
             } >
-                {list.map(p=><CartRow key={p.id} {...p} />)}
+                {items.map(p=><CartRow key={p.id} {...p} />)}
             </div>
 
         </Fragment>

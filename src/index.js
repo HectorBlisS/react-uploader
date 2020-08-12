@@ -4,11 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom'
+import useCartContext from './components/contexts/useCart'
+
+const AppWithContext = ()=>{
+  const Provider = useCartContext()
+  return <Provider>
+          <App/> 
+        </Provider>
+}
 
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
-    <App />
+    <AppWithContext />
   </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')
