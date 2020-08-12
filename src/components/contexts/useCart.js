@@ -15,6 +15,8 @@ export const CartContext = createContext(initial);
         setState({...state, items:[...state.items, product]})
     }
 
+    // agregar la funcion para eliminar un item
+
     const Provider = ({children})=>{
         return (
             <CartContext.Provider value={
