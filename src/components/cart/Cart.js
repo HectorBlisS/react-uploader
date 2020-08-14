@@ -25,7 +25,7 @@ export default function Cart({show=false, onCancel}){
                 show ? styles.cartHolder :
                 `${styles.cartOverlay} ${styles.hidden}`
             } >
-                {items.map(p=><CartRow key={p.id} {...p} />)}
+                {items.map(p=><CartRow key={p.id} {...p} product={p} />)}
             </div>
 
         </Fragment>
